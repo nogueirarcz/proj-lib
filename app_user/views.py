@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import User
 from django.shortcuts import redirect
+from hashlib import sha256
 
 # Create your views here.
 def login(request):
@@ -11,7 +12,9 @@ def login(request):
 
 def cadastro(request):
 
-    return render(request, 'cadastro.html')
+    status = request.GET.get('status')
+
+    return render(request, 'cadastro.html', {'status': status})
 
 def validar_cadastro(request):
 
@@ -21,20 +24,33 @@ def validar_cadastro(request):
 
     senha = request.POST.get('senha')
 
-    # Criando e salvando o usuário (modelo de teste)
-
+    # Criando e salvando o usuário
     user = User.objects.filter(email = email)
-    if len(user > 0):
 
-        return redirect('/auth/login/')
+    # Verifica se nome ou email estão vazios
+    if len(nome.strip()) == 0 or len(email.strip()) == 0:
+
+        return redirect('/auth/cadastro/?status=1')
+
+    # Verifica se já existe o usuário
+    if len(user) > 0:
+
+        return redirect('/auth/cadastro/?status=2')
+    
+    # Verifica tamanho da senha
+    if len(senha) < 8:
+
+        return redirect('/auth/cadastro/?status=3')
     
     try:
+
+        senha = sha256(senha.encode()).hexdigest()
 
         user = User(nome = nome, senha = senha, email = email)
         user.save()
 
-        return redirect('/auth/login/')
+        return redirect('/auth/cadastro/?status=0')
     
     except:
 
-        return redirect('/auth/cadastro/')
+        return redirect('/auth/cadastro/?status=4')

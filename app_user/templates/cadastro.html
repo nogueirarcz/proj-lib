@@ -5,7 +5,37 @@
 {% block 'content' %}
 
     <div class="container">
-        
+
+        {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado
+            </div>
+        {% endif %}
+
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Nome e email não podem ficar vazios
+            </div>
+        {% endif %}        
+
+        {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                A senha deve conter 8 ou mais caracteres
+            </div>
+        {% endif %}        
+
+        {% if status == '3' %}
+            <div class="alert alert-danger" role="alert">
+                Usuário já cadastrado
+            </div>
+        {% endif %}  
+
+        {% if status == '4' %}
+            <div class="alert alert-danger" role="alert">
+                Falha desconhecida
+            </div>
+        {% endif %}
+
         <div class="row">
 
             <div class="col-md-3"></div>
@@ -31,6 +61,8 @@
                     <br> <!-- Corrigir posteriormente -->
 
                     <input type="submit" value="Enviar" class="btn btn-info btn-lg">
+
+                    <a href="{% url "login" %}" class="btn btn-warning btn-lg">Login</a>
 
                 </form>
 
