@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import User
 from django.shortcuts import redirect
+from hashlib import sha256
 
 # Create your views here.
 def login(request):
@@ -41,6 +42,8 @@ def validar_cadastro(request):
     
     try:
 
+        senha = sha256(senha.encode()).hexdigest()
+        
         user = User(nome = nome, senha = senha, email = email)
         user.save()
 
