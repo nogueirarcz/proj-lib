@@ -12,7 +12,9 @@ def login(request):
 
 def cadastro(request):
 
-    return render(request, 'cadastro.html')
+    status = request.GET.get('status')
+
+    return render(request, 'cadastro.html', {'status': status})
 
 def validar_cadastro(request):
 
@@ -43,7 +45,7 @@ def validar_cadastro(request):
     try:
 
         senha = sha256(senha.encode()).hexdigest()
-        
+
         user = User(nome = nome, senha = senha, email = email)
         user.save()
 
