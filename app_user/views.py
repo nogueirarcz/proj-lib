@@ -11,6 +11,22 @@ def login(request):
 
 def validar_login(request):
 
+    email = request.POST.get('email')
+    senha = request.POST.get('senha')
+    senha = sha256(senha.encode()).hexdigest()
+
+    user = User.objects.filter(email = email).filter(senha = senha)
+
+    if len(user) == 0:
+
+        return redirect('/auth/login/?status=1')
+    
+    elif len(user) > 0:
+
+        request.session['usuario'] = user[0].id
+
+        ... # Implementar após pag de login success
+
     return HttpResponse('ok')
 
 # Views de cadastro
