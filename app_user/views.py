@@ -26,9 +26,16 @@ def validar_login(request):
 
         request.session['user'] = user[0].id
 
-        return redirect('/livro/home/')
+        return redirect(f'/livro/home/')
 
     return HttpResponse('ok')
+
+def sair(request):
+
+    request.session.flush()
+
+    return redirect('/auth/login/')
+
 
 # Views de cadastro
 def cadastro(request):
