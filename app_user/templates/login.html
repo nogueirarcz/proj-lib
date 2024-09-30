@@ -3,6 +3,23 @@
 {% block 'title' %}Login{% endblock 'title' %}
 
 {% block 'content' %}
+<div class="container">
+
+    {% if status == '1' %}
+    
+        <div class="alert alert-danger" role="alert">
+            Email ou senha inválidos
+        </div>
+
+    {% endif %}
+
+{% if status == '2' %}
+    
+    <div class="alert alert-danger" role="alert">
+        Faça login para acessar esta página
+    </div>
+
+{% endif %}
 
     <div class="row">
 
@@ -15,11 +32,11 @@
             <form action="{% url 'validar_login' %}" method="POST">{% csrf_token %}
 
                 <label for="">Email</label>
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" placeholder="Email" name="email">
                 <br> <!-- Corrigir posteriormente -->
                 
                 <label for="">Senha</label>
-                <input type="password" class="form-control" placeholder="Senha">
+                <input type="password" class="form-control" placeholder="Senha" name="senha">
                 <br> <!-- Corrigir posteriormente -->
 
                 <input type="submit" class="btn btn-info btn-lg" value="Enviar">
@@ -32,5 +49,5 @@
         <div class="col-md-3"></div>
 
     </div>
-
+</div>
 {% endblock 'content' %}
