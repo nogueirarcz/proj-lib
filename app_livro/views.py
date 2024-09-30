@@ -2,6 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # Create your views here.
-def cadastrar(request):
+def home(request):
 
-    return HttpResponse('Página de cadastro de livros')
+    return HttpResponse('Homepage após login')

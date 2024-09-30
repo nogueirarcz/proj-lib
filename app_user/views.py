@@ -7,7 +7,8 @@ from hashlib import sha256
 # Views de login
 def login(request):
 
-    return render(request, 'login.html')
+    status = request.GET.get('status')
+    return render(request, 'login.html', {'status': status})
 
 def validar_login(request):
 
@@ -23,9 +24,9 @@ def validar_login(request):
     
     elif len(user) > 0:
 
-        request.session['usuario'] = user[0].id
+        request.session['user'] = user[0].id
 
-        ... # Implementar após pag de login success
+        return redirect('/livro/home/')
 
     return HttpResponse('ok')
 
