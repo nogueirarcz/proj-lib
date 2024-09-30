@@ -4,12 +4,16 @@ from .models import User
 from django.shortcuts import redirect
 from hashlib import sha256
 
-# Create your views here.
+# Views de login
 def login(request):
 
-    return HttpResponse('login')
+    return render(request, 'login.html')
 
+def validar_login(request):
 
+    return HttpResponse('ok')
+
+# Views de cadastro
 def cadastro(request):
 
     status = request.GET.get('status')
