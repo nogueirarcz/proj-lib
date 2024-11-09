@@ -2,6 +2,14 @@ from django.db import models
 from datetime import date
 
 # Create your models here.
+
+class Categoria(models.Model):
+
+    nome = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.nome
+
 class Livros(models.Model):
 
     nome = models.CharField(max_length=100)
@@ -13,6 +21,7 @@ class Livros(models.Model):
     data_emprestimo = models.DateTimeField(blank=True, null=True)
     data_devolucao = models.DateTimeField(blank=True, null=True)
     tempo_duracao = models.DateField(blank=True, null=True)
+    categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
 
     class Meta:
 
