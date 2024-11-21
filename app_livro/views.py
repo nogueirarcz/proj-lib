@@ -8,7 +8,7 @@ def home(request):
 
     if request.session.get('user'):
 
-        user = User.objects.get(id = request.session['user']).nome
+        user = User.objects.get(id = request.session['user'])
 
         livros = Livros.objects.filter(usuario = user)
 
