@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from app_user.models import User
 
 # Create your models here.
 
@@ -22,6 +23,7 @@ class Livros(models.Model):
     data_devolucao = models.DateTimeField(blank=True, null=True)
     tempo_duracao = models.DateField(blank=True, null=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
+    usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 
     class Meta:
 
