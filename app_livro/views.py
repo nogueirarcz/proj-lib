@@ -18,3 +18,6 @@ def home(request):
 
         return redirect('/auth/login/?status=2')
     
+def ver_livro(request, id):
+
+    return HttpResponse(id)
