@@ -1,11 +1,32 @@
 {% extends "base.html" %}
 
 {% block 'content' %}
-    
-    {% for livro in livros %}
 
-        {{livro}}
+    <div class="container">
+        {% for livro in livros %}
+        <div class="row">
 
-    {% endfor %}
+            <div class="col-md">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{livro.nome}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{livro.autor}}</h6>
+                        <p class="card-text">{{livro.categoria}}</p>
+                        {%if livro.emprestado%} 
+                            Emprestado
+                        {% else %}
+                            Disponível
+                        {%endif%}
+
+                        <br>
+                        <button class="btn btn-lg btn-info">Ver</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
 
 {% endblock 'content' %}
