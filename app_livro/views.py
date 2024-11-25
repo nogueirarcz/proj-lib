@@ -20,4 +20,6 @@ def home(request):
     
 def ver_livro(request, id):
 
-    return HttpResponse(id)
+    livros = Livros.objects.get(id=id)
+
+    return render(request, 'ver_livro.html', {'livro': livros})
