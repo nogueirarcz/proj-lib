@@ -20,6 +20,17 @@ def home(request):
     
 def ver_livro(request, id):
 
-    livros = Livros.objects.get(id=id)
+    if request.session.get('user'):
 
-    return render(request, 'ver_livro.html', {'livro': livros})
+        livros = Livros.objects.get(id=id)
+
+        if request.session.get('user') == livros.usuario.id:
+
+            return render(request, 'ver_livro.html', {'livro': livros})
+        else:
+
+            return HttpResponse('Página indisponível')
+    else:
+
+        return redirect('/auth/login/?status=2')
+        
